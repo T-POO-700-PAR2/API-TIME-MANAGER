@@ -1,0 +1,10 @@
+{
+  "name": "time_manager",
+  "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "deploy": "cd assets && npm install && cd .. && MIX_ENV=prod mix phx.digest"
+  }
+}
