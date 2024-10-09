@@ -3,7 +3,7 @@ alias TimeManager.Accounts.User
 alias TimeManager.TimeTracking.{Clock, WorkingTime}
 alias TimeManager.Teams.Team
 
-# Seed: Utilisateurs
+# Seed : Utilisateurs
 IO.puts("Création des utilisateurs...")
 
 user1 = %User{
@@ -26,7 +26,7 @@ user3 = %User{
 
 IO.puts("Utilisateurs créés !")
 
-# Seed: Equipes (Teams)
+# Seed : Équipes (Teams)
 IO.puts("Création des équipes...")
 
 team1 = %Team{
@@ -37,9 +37,9 @@ team2 = %Team{
   name: "Marketing Team"
 } |> Repo.insert!()
 
-IO.puts("Equipes créées !")
+IO.puts("Équipes créées !")
 
-# Seed: Pointages (Clocks)
+# Seed : Pointages (Clocks)
 IO.puts("Création des pointages...")
 
 current_time = DateTime.truncate(DateTime.utc_now(), :second)
@@ -70,7 +70,7 @@ clock4 = %Clock{
 
 IO.puts("Pointages créés !")
 
-# Seed: Temps de travail (WorkingTimes)
+# Seed : Heures de travail (Working Times)
 IO.puts("Création des heures de travail...")
 
 working_time1 = %WorkingTime{
