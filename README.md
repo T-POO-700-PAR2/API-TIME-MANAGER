@@ -33,3 +33,6 @@ curl -X GET http://localhost:4000/api/teams
 # API-TIME-MANAGER
 
  https://git.heroku.com/time-manager-par2.git
+
+
+ curl -X GET https://time-manager-par2-58868fe31538.herokuapp.com/api/working_times
