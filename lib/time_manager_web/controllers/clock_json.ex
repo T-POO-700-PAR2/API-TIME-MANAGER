@@ -1,6 +1,7 @@
 defmodule TimeManagerWeb.ClockJSON do
   alias TimeManager.TimeTracking.Clock
 
+  @spec index(%{:clocks => any(), optional(any()) => any()}) :: %{data: list()}
   @doc """
   Renders a list of clocks.
   """
