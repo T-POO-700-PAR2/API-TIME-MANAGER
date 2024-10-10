@@ -1,6 +1,6 @@
 alias TimeManager.Repo
 alias TimeManager.Accounts.User
-alias TimeManager.TimeTracking.{Clock, WorkingTime}  # Utilisation correcte du module Clock
+alias TimeManager.TimeTracking.{Clock, WorkingTime}  # Assure-toi que Clock et WorkingTime sont bien définis ici
 alias TimeManager.Teams.Team
 
 # Seed : Utilisateurs
