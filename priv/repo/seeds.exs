@@ -1,6 +1,6 @@
 alias TimeManager.Repo
 alias TimeManager.Accounts.User
-alias TimeManager.TimeTracking.{Clock, WorkingTime}  # Correct alias for Clock
+alias TimeManager.TimeTracking.{Clock, WorkingTime}
 alias TimeManager.Teams.Team
 
 # Seed : Utilisateurs
@@ -47,25 +47,25 @@ current_time = DateTime.truncate(DateTime.utc_now(), :second)
 clock1 = %Clock{
   time: current_time,
   status: true,
-  user_id: user1.id
+  user_id: user1.id  # Liaison avec user1
 } |> Repo.insert!()
 
 clock2 = %Clock{
   time: current_time,
   status: false,
-  user_id: user1.id
+  user_id: user1.id  # Liaison avec user1
 } |> Repo.insert!()
 
 clock3 = %Clock{
   time: current_time,
   status: true,
-  user_id: user2.id
+  user_id: user2.id  # Liaison avec user2
 } |> Repo.insert!()
 
 clock4 = %Clock{
   time: current_time,
   status: false,
-  user_id: user2.id
+  user_id: user2.id  # Liaison avec user2
 } |> Repo.insert!()
 
 IO.puts("Pointages créés !")
@@ -76,25 +76,25 @@ IO.puts("Création des heures de travail...")
 working_time1 = %WorkingTime{
   start: ~U[2024-10-01 08:00:00Z],
   end: ~U[2024-10-01 17:00:00Z],
-  user_id: user1.id
+  user_id: user1.id  # Liaison avec user1
 } |> Repo.insert!()
 
 working_time2 = %WorkingTime{
   start: ~U[2024-10-02 09:00:00Z],
   end: ~U[2024-10-02 18:00:00Z],
-  user_id: user1.id
+  user_id: user1.id  # Liaison avec user1
 } |> Repo.insert!()
 
 working_time3 = %WorkingTime{
   start: ~U[2024-10-01 09:00:00Z],
   end: ~U[2024-10-01 18:00:00Z],
-  user_id: user2.id
+  user_id: user2.id  # Liaison avec user2
 } |> Repo.insert!()
 
 working_time4 = %WorkingTime{
   start: ~U[2024-10-02 10:00:00Z],
   end: ~U[2024-10-02 19:00:00Z],
-  user_id: user2.id
+  user_id: user2.id  # Liaison avec user2
 } |> Repo.insert!()
 
 IO.puts("Heures de travail créées !")
