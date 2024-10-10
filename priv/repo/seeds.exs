@@ -1,6 +1,6 @@
 alias TimeManager.Repo
 alias TimeManager.Accounts.User
-alias TimeManager.TimeTracking.{Clock, WorkingTime}
+alias TimeManager.TimeTracking.{Clock, WorkingTime}  # Correct alias for Clock
 alias TimeManager.Teams.Team
 
 # Seed : Utilisateurs
