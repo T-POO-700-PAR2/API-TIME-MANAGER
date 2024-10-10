@@ -1,11 +1,16 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import axios from './axios'; // Importe ton fichier axios configuré
+import router from './router';  // Import du routeur
+import axios from 'axios';
 
+// Crée une instance de l'application Vue
 const app = createApp(App);
 
-// Associe l'instance Axios à l'application Vue
+// Configurer Axios globalement (app.config.globalProperties.$axios = axios)
 app.config.globalProperties.$axios = axios;
 
-app.mount('#app');
+// Utiliser le routeur
+app.use(router);
 
+// Monter l'application
+app.mount('#app');
