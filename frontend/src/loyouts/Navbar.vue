@@ -2,13 +2,16 @@
 <template>
     <div>
         <header>
+            <div class="Btn">
+                <ButtonConnect></ButtonConnect>
+            </div>
             <h1>Mon Application</h1>
             <nav>
                 <router-link to="/">Accueil</router-link>
                 <router-link to="/manager">Manager</router-link>
             </nav>
+            
         </header>
-
         <main>
             <slot></slot> 
         </main>
@@ -17,8 +20,13 @@
 </template>
 
 <script>
+import ButtonConnect from '@/components/ButtonConnect.vue';
+
 export default {
     name: 'MainLayout',
+    components: {
+        ButtonConnect
+    }
 };
 </script>
 
@@ -38,5 +46,9 @@ nav a {
 footer {
     margin-top: 20px;
     text-align: center;
+}
+.btn{
+    position: relative;
+    right: 0px;
 }
 </style>

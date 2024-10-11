@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Navbar></Navbar>
         <div>
                 <h1>Metéo</h1>
                 <input type="text" v-model="searchQuery" placeholder="Rechercher une ville" />
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+import Navbar from '../loyouts/Navbar.vue';
 import { getAllDataMeteo } from '@/services/api';
 
 export default {
@@ -40,6 +42,8 @@ export default {
             cities: [],
             searchQuery: ''
         };
+    }, components: {
+        Navbar
     },
     mounted() {
         const allDataCities = getAllDataMeteo();

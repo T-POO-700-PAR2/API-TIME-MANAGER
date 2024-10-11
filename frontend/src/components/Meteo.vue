@@ -6,14 +6,19 @@
             <span>{{ selectedCity.temperature }}°</span>
         </div>
         <div>
-            <button @click="showRandomCity">Voir plus</button>
-            <button><RouterLink to="/meteo">Rechercher une ville</RouterLink></button>
+            <CustomButton @click="showRandomCity">
+                    Rechercher une ville
+                </CustomButton>
+            <CustomButton link="/meteo">
+                Rechercher une ville
+            </CustomButton>
         </div>
     </div>
 </template>
 
 <script>
 import { getAllDataMeteo, getNameContry } from '@/services/api';
+import CustomButton from '../components/CustomButton.vue';
 
 export default {
     name: 'MeteoComponent',
@@ -23,6 +28,9 @@ export default {
             nomCities: [],  
             selectedCity: null
         };
+    },
+    components: {
+        CustomButton
     },
     mounted() {
         const allDataCities = getAllDataMeteo();

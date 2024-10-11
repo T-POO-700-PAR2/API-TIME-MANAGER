@@ -6,15 +6,18 @@
             <p>Ceci est la page Manager de l'application Vue.js</p>
         </div>
     </Navbar>
+    <BarChart></BarChart>
 </template>
 
 <script>
 import Navbar from '../loyouts/Navbar.vue';
+import BarChart from '../components/BarChart.vue'
 
 export default {
     name: 'ManagerPage',
     components: {
-        Navbar
+        Navbar,
+        BarChart
     }
 };
 </script>
