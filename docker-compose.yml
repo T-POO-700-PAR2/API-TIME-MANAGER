@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  time_manager_api:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - DATABASE_URL=ecto://postgres:postgres@db/time_manager_db
+      - SECRET_KEY_BASE=SOME_SECRET_KEY_BASE
+      - MIX_ENV=prod
+    depends_on:
+      - db
+    command: mix ecto.migrate && bin/time_manager start
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: time_manager_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
