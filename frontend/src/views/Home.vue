@@ -8,15 +8,19 @@
             </div>
         </template>
     </Navbar>
+    <Meteo/>
+     
 </template>
 
 <script>
 import Navbar from '../loyouts/Navbar.vue';
+import Meteo from '../components/Meteo.vue';
 
 export default {
     name: 'HomePage',
     components: {
-        Navbar
+        Navbar,
+        Meteo
     }
 };
 </script>

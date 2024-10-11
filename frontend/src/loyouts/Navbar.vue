@@ -10,12 +10,9 @@
         </header>
 
         <main>
-            <slot></slot> <!-- Le contenu des pages sera injecté ici -->
+            <slot></slot> 
         </main>
 
-        <footer>
-            <p>&copy; 2024 Mon Application</p>
-        </footer>
     </div>
 </template>
 
