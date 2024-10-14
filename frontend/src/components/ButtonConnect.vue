@@ -1,15 +1,24 @@
 <template>
     <div>
-        <button>
-            <img src="../../public/icons/profil.png" alt="">
-            <span>Connect</span>
-        </button>
+        <router-link :to="link" v-if="link">
+            <button>
+                <img src="../../public/icons/profil.png" alt="">
+                <span>Connect</span>
+            </button>
+        </router-link>
     </div>
 </template>
 
 <script>
 export default {
     name: 'ButtonConnectComponent',
+    props: {
+        link: {
+            type: String,
+            required: false,
+            default: null
+        }
+    }
 };
 </script>
 

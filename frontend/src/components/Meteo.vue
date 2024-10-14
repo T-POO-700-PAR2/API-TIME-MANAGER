@@ -1,16 +1,17 @@
 <template>
-    <div>
-        <h1>La Méteo</h1>
-        <div v-if="selectedCity">
+    <div class="meteo-container">
+        <div v-if="selectedCity" class="city-info">
             <h2>{{ selectedCity.city }}</h2>
-            <span>{{ selectedCity.temperature }}°</span>
+            <span class="temperature">{{ selectedCity.temperature }}°C</span>
+            <p class="condition">Condition: {{ selectedCity.condition }}</p>
+            <p class="details">Humidité: {{ selectedCity.humidity }}% | Vent: {{ selectedCity.wind_speed }} km/h</p>
         </div>
-        <div>
+        <div class="buttons">
             <CustomButton @click="showRandomCity">
-                    Rechercher une ville
-                </CustomButton>
+                Changer la ville
+            </CustomButton>
             <CustomButton link="/meteo">
-                Rechercher une ville
+                Rechercher une ville spécifique
             </CustomButton>
         </div>
     </div>
@@ -24,8 +25,8 @@ export default {
     name: 'MeteoComponent',
     data() {
         return {
-            cities: [],     
-            nomCities: [],  
+            cities: [],
+            nomCities: [],
             selectedCity: null
         };
     },
@@ -51,13 +52,68 @@ export default {
                     this.selectedCity = foundCity;
                 }
             }
-        },
+        }
     }
 };
 </script>
 
-<style>
-button {
-cursor: pointer;
+<style scoped>
+.meteo-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
 }
-    </style>
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.city-info {
+    margin-bottom: 20px;
+}
+
+.city-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+.temperature {
+    font-size: 2.5rem;
+    color: #ff5722;
+}
+
+.condition {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.details {
+    font-size: 1rem;
+    color: #777;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+</style>

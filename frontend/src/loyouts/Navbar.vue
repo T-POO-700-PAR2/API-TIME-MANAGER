@@ -3,7 +3,7 @@
     <div>
         <header>
             <div class="Btn">
-                <ButtonConnect></ButtonConnect>
+                <ButtonConnect link="/connect"></ButtonConnect>
             </div>
             <h1>Mon Application</h1>
             <nav>
