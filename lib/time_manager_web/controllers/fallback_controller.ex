@@ -21,4 +21,11 @@ defmodule TimeManagerWeb.FallbackController do
     |> put_view(html: TimeManagerWeb.ErrorHTML, json: TimeManagerWeb.ErrorJSON)
     |> render(:"404")
   end
+
+  # This clause handles general errors returned by the controller.
+  def call(conn, {:error, reason}) do
+    conn
+    |> put_status(:bad_request)
+    |> json(%{error: reason})
+  end
 end

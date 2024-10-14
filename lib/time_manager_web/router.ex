@@ -1,39 +1,33 @@
 defmodule TimeManagerWeb.Router do
   use TimeManagerWeb, :router
 
-  import TimeManagerWeb.Plugs.EnsureRolePlug
+  alias TimeManagerWeb.Plugs.AuthPlug
 
+  # Define pipelines
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  pipeline :manager do
-    plug :ensure_manager_role
-  end
-
-  pipeline :general_manager do
-    plug :ensure_general_manager_role
+  pipeline :authenticated do
+    plug AuthPlug
   end
 
   scope "/api", TimeManagerWeb do
     pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
+    post "/login", UserController, :login
+    post "/logout", UserController, :logout
+    resources "/users", UserController, except: [:new, :edit] # Open access for user creation and login
+  end
+
+  # Authenticated API routes (protected by JWT auth)
+  scope "/api", TimeManagerWeb do
+    pipe_through [:api, :authenticated] # Uses both the API and authentication pipelines
+
+    # Only accessible if authenticated
     resources "/teams", TeamController, except: [:new, :edit]
     resources "/clocks", ClockController, except: [:new, :edit]
     resources "/working_times", WorkingTimeController, except: [:new, :edit]
     resources "/promotions", PromotionController, except: [:new, :edit]
-  end
-
-  scope "/api", TimeManagerWeb do
-    pipe_through [:api, :manager]
-
-    post "/teams/:team_id/add_user", TeamController, :add_user
-    delete "/teams/:team_id/remove_user/:user_id", TeamController, :remove_user
-  end
-
-  scope "/api", TimeManagerWeb do
-    pipe_through [:api, :general_manager]
-
   end
 end

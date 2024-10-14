@@ -23,12 +23,6 @@ config :time_manager, TimeManagerWeb.Endpoint,
   live_view: [signing_salt: "Ck9/b/nZ"]
 
 # Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
 config :time_manager, TimeManager.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configures Elixir's Logger
@@ -39,6 +33,12 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
+# JWT Configuration for Joken
+config :joken,
+  default_signer: %{
+    alg: "HS256",
+    key: System.get_env("SECRET_KEY_BASE") || "Nzlddl2xEmLt6mAxR4yT+3R4MNUiiKAeGdSlObI0H1pdAVrfQErlV3Oak1Kj4Ku4"
+  }
+
+# Import environment-specific config.
 import_config "#{config_env()}.exs"
