@@ -45,7 +45,11 @@ defmodule TimeManager.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:guardian, "~> 2.0"},
+      {:json_web_token, "~> 0.2.5"},
+      {:bcrypt_elixir, "~> 3.0"},
+      {:joken, "~> 2.5"}
     ]
   end
 

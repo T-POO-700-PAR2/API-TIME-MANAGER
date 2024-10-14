@@ -15,8 +15,18 @@ defmodule TimeManagerWeb.Router do
     plug :ensure_general_manager_role
   end
 
+  # Pipeline pour gérer les utilisateurs authentifiés
+  pipeline :auth do
+    # Assurez-vous de créer ce plug pour gérer l'authentification
+    plug TimeManagerWeb.Plugs.AuthPlug
+  end
+
   scope "/api", TimeManagerWeb do
     pipe_through :api
+
+    # Routes d'authentification
+    post "/signup", AuthController, :signup
+    post "/login", AuthController, :login
 
     resources "/users", UserController, except: [:new, :edit]
     resources "/teams", TeamController, except: [:new, :edit]
@@ -35,5 +45,6 @@ defmodule TimeManagerWeb.Router do
   scope "/api", TimeManagerWeb do
     pipe_through [:api, :general_manager]
 
+    # Vous pouvez ajouter ici d'autres routes pour le manager général
   end
 end

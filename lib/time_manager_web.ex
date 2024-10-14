@@ -10,7 +10,7 @@ defmodule TimeManagerWeb do
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
-  on imports, uses and aliases.
+  on imports, uses, and aliases.
 
   Do NOT define functions inside the quoted expressions
   below. Instead, define additional modules and import
@@ -26,6 +26,7 @@ defmodule TimeManagerWeb do
       # Import common connection and controller functions to use in pipelines
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.Router.Helpers
     end
   end
 
@@ -33,6 +34,27 @@ defmodule TimeManagerWeb do
     quote do
       use Phoenix.Channel
     end
+  end
+
+  # Génération de token JWT
+  def token(user_id) do
+    # Secret Key should be stored in config/prod.exs or config/dev.exs
+    secret_key = Application.get_env(:time_manager, :secret_key_base)
+
+    signer = Joken.Signer.create("HS256", secret_key)
+
+    claims = %{
+      user_id: user_id,
+      # Le jeton expire dans une heure
+      exp: Joken.current_time() + 3600
+    }
+
+    {:ok, token, _claims} =
+      Joken.token(claims)
+      |> Joken.with_signer(signer)
+      |> Joken.generate_and_sign()
+
+    token
   end
 
   def controller do
@@ -44,6 +66,7 @@ defmodule TimeManagerWeb do
       import Plug.Conn
       import TimeManagerWeb.Gettext
 
+      # Vérification des routes et autorisation
       unquote(verified_routes())
     end
   end
