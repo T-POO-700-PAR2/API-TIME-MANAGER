@@ -40,4 +40,18 @@ defmodule TimeManagerWeb.UserController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def get_user_by_email(conn, %{"email" => email}) do
+    case Accounts.get_user_by_email(email) do
+      nil ->
+        conn
+        |> put_status(:not_found)
+        |> json(%{error: "User not found"})
+
+      user ->
+        conn
+        |> put_status(:ok)
+        |> json(user)
+    end
+  end
 end
