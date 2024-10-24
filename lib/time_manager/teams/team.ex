@@ -4,14 +4,14 @@ defmodule TimeManager.Teams.Team do
 
   schema "teams" do
     field :name, :string
-
-    timestamps(type: :utc_datetime)
+    many_to_many :users, TimeManager.Accounts.User, join_through: "teams_users"
+    timestamps()
   end
 
-  @doc false
   def changeset(team, attrs) do
     team
     |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> cast_assoc(:users, required: false)
   end
 end
