@@ -13,7 +13,8 @@ defmodule TimeManagerWeb.WorkingTimeController do
 
   def create(conn, %{"working_time" => working_time_params}) do
     # S'assurer qu'un utilisateur est associé
-    with {:ok, %WorkingTime{} = working_time} <- TimeTracking.create_working_time(working_time_params) do
+    with {:ok, %WorkingTime{} = working_time} <-
+           TimeTracking.create_working_time(working_time_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/working_times/#{working_time.id}")
@@ -26,10 +27,26 @@ defmodule TimeManagerWeb.WorkingTimeController do
     render(conn, :show, working_time: working_time)
   end
 
+  def show_by_user_id(conn, %{"user_id" => user_id}) do
+    working_times = TimeTracking.get_working_times_by_user_id(user_id)
+
+    if working_times == [] do
+      conn
+      |> put_status(:not_found)
+      |> render(TimeManagerWeb.ErrorJSON, "404.json",
+        message: "Working times not found for user_id #{user_id}"
+      )
+    else
+      # Utilise :index avec working_times:
+      render(conn, :index, working_times: working_times)
+    end
+  end
+
   def update(conn, %{"id" => id, "working_time" => working_time_params}) do
     working_time = TimeTracking.get_working_time!(id)
 
-    with {:ok, %WorkingTime{} = working_time} <- TimeTracking.update_working_time(working_time, working_time_params) do
+    with {:ok, %WorkingTime{} = working_time} <-
+           TimeTracking.update_working_time(working_time, working_time_params) do
       render(conn, :show, working_time: working_time)
     end
   end

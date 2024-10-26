@@ -18,6 +18,8 @@ defmodule TimeManagerWeb.Router do
   scope "/api", TimeManagerWeb do
     pipe_through :api
 
+    get "/users/email/:email", UserController, :get_user_by_email
+    get "/working_times/:user_id", WorkingTimeController, :show_by_user_id
     resources "/users", UserController, except: [:new, :edit]
     resources "/teams", TeamController, except: [:new, :edit]
     resources "/clocks", ClockController, except: [:new, :edit]
@@ -34,6 +36,5 @@ defmodule TimeManagerWeb.Router do
 
   scope "/api", TimeManagerWeb do
     pipe_through [:api, :general_manager]
-
   end
 end

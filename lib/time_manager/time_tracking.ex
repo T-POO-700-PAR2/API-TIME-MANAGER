@@ -197,4 +197,9 @@ defmodule TimeManager.TimeTracking do
   def change_working_time(%WorkingTime{} = working_time, attrs \\ %{}) do
     WorkingTime.changeset(working_time, attrs)
   end
+
+  def get_working_times_by_user_id(user_id) do
+    from(w in WorkingTime, where: w.user_id == ^user_id)
+    |> Repo.all()
+  end
 end
